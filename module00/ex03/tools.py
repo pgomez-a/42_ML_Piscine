@@ -7,8 +7,6 @@ def add_intercept(x):
     """
     if not type(x) == np.ndarray or x.size == 0:
         return None
-    try:
-        bound = x.shape[1]
-    except:
+    if x.size == x.shape[0]:
         x = x.reshape(len(x), 1)
     return np.insert(x, 0, [1] * x.shape[0], 1)
