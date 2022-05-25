@@ -25,7 +25,7 @@ def predict_(x, theta):
 def simple_gradient(x, y , theta):
     """
     Computes a gradient vector from three non-empty numpy.array,
-    whithouth any for loop.
+    without any for loop.
     """
     if not type(x) == np.ndarray or x.size == 0:
         return
