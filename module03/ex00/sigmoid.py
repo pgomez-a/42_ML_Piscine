@@ -7,4 +7,4 @@ def sigmoid_(x):
     """
     if not type(x) == np.ndarray or x.size == 0:
         return
-    return 1 / (1 + math.e**-x)
+    return 1 / (1 + math.e ** -x)

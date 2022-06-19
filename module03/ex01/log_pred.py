@@ -7,7 +7,7 @@ def sigmoid_(x):
     """
     if not type(x) == np.ndarray or x.size == 0:
         return
-    return 1 / (1 + math.e**-x)
+    return 1 / (1 + math.e ** -x)
 
 def logistic_predict_(x, theta):
     """
@@ -20,5 +20,5 @@ def logistic_predict_(x, theta):
         return
     if x.shape[1] != theta.shape[0] - 1:
         return
-    x = np.insert(x, 0, [1] * x.shape[0], 1)
+    x = np.insert(x, 0, 1, 1)
     return sigmoid_(np.matmul(x, theta))
