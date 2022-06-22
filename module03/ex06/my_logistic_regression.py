@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import sys
 
 class MyLogisticRegression(object):
     """
@@ -34,7 +35,7 @@ class MyLogisticRegression(object):
         x = np.insert(x, 0, 1, 1)
         return self.sigmoid_(np.matmul(x, self.theta)).reshape((-1, 1)).astype(float)
 
-    def loss_(self, y, y_hat):
+    def loss_(self, y_hat, y):
         """
         Computes the logistic loss value.
         """
@@ -44,8 +45,8 @@ class MyLogisticRegression(object):
             return
         if not type(self.eps) == float:
             return
-        y_hat[y_hat == 1.] -= self.eps
         y_hat[y_hat == 0.] += self.eps
+        y_hat[y_hat == 1.] -= self.eps
         return -sum(y * np.log(y_hat) + (1 - y) * np.log(1 - y_hat)) / y.size
 
     def log_gradient_(self, x, y):
@@ -56,13 +57,9 @@ class MyLogisticRegression(object):
             return
         if x.size == 0 or y.size == 0:
             return
-        try:
-            y_hat = self.predict_(x)
-            x = np.insert(x, 0, 1, 1)
-            output = np.matmul(x.transpose(), y_hat - y) / y.size
-            return output
-        except:
-            return
+        y_hat = self.predict_(x)
+        x = np.insert(x, 0, 1, 1)
+        return np.matmul(x.transpose(), y_hat - y) / y.size
 
     def fit_(self, x, y):
         """
